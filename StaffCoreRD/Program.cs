@@ -46,6 +46,26 @@ using (var scope = app.Services.CreateScope())
             await roleManager.CreateAsync(new IdentityRole(rol));
         }
     }
+
+    // Sembrar el usuario Administrador de prueba (si no existe todavía)
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+    const string adminEmail = "luisbravobello@gmail.com";
+    const string adminPassword = "Luis1234";
+
+    var adminUser = await userManager.FindByEmailAsync(adminEmail);
+    if (adminUser == null)
+    {
+        adminUser = new IdentityUser { UserName = adminEmail, Email = adminEmail, EmailConfirmed = true };
+        var createResult = await userManager.CreateAsync(adminUser, adminPassword);
+        if (createResult.Succeeded)
+        {
+            await userManager.AddToRoleAsync(adminUser, "Administrador");
+        }
+    }
+    else if (!await userManager.IsInRoleAsync(adminUser, "Administrador"))
+    {
+        await userManager.AddToRoleAsync(adminUser, "Administrador");
+    }
 }
 
 // Configure the HTTP request pipeline.
