@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StaffCoreRD.Data;
 using StaffCoreRD.Models;
+using StaffCoreRD.Models.StaffViewModels;
+
 
 namespace StaffCoreRD.Controllers
 {
@@ -38,6 +40,24 @@ namespace StaffCoreRD.Controllers
 
             var lista = await query.OrderBy(s => s.Nombre).ToListAsync();
             return PartialView("_TablaPersonal", lista);
+        }
+
+        // GET: /Staff/Estadisticas -> Resumen por departamento (bonus): total empleados y total nomina
+        public async Task<IActionResult> Estadisticas()
+        {
+            var resumen = await _context.Personal
+                .Where(s => s.Activo)
+                .GroupBy(s => s.Departamento)
+                .Select(g => new DepartamentoResumenViewModel
+                {
+                    Departamento = g.Key,
+                    TotalEmpleados = g.Count(),
+                    TotalNomina = g.Sum(s => s.Salario)
+                })
+                .OrderBy(r => r.Departamento)
+                .ToListAsync();
+
+            return View(resumen);
         }
 
         // GET: /Staff/Details/5 -> Administrador, RRHH y Viewer

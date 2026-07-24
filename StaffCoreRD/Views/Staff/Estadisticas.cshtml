@@ -1,0 +1,48 @@
+@model IEnumerable<StaffCoreRD.Models.StaffViewModels.DepartamentoResumenViewModel>
+@{
+    ViewData["Title"] = "Estadísticas por Departamento";
+}
+
+<h2>Resumen por Departamento</h2>
+<p class="text-muted">Total de empleados activos y nómina agrupados por departamento.</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Departamento</th>
+            <th>Total de Empleados</th>
+            <th>Total de Nómina</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="3" class="text-center text-muted">No hay datos para mostrar.</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Departamento</td>
+                    <td>@item.TotalEmpleados</td>
+                    <td>@item.TotalNomina.ToString("C")</td>
+                </tr>
+            }
+        }
+    </tbody>
+    @if (Model.Any())
+    {
+        <tfoot>
+            <tr>
+                <th>Total general</th>
+                <th>@Model.Sum(r => r.TotalEmpleados)</th>
+                <th>@Model.Sum(r => r.TotalNomina).ToString("C")</th>
+            </tr>
+        </tfoot>
+    }
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
