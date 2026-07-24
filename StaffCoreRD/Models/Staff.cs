@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StaffCoreRD.Models
 {
@@ -26,6 +27,7 @@ namespace StaffCoreRD.Models
         [Range(23223, double.MaxValue, ErrorMessage = "Mínimo RD$23,223")]
         [Display(Name = "Salario")]
         [DataType(DataType.Currency)]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Salario { get; set; }
 
         [Display(Name = "Fecha de Ingreso")]
