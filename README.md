@@ -1,8 +1,7 @@
-========================================================
+
 StaffCore RD - Sistema de Gestion de Personal
 ISW-311 Tecnologias de Internet I
 Universidad Central del Este
-========================================================
 
 Nombre:     Luis Alejandro Bravo Bello
 Matricula:  LB2024-1279
