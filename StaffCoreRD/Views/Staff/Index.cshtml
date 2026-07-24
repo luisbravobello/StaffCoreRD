@@ -1,4 +1,4 @@
-﻿@model IEnumerable<StaffCoreRD.Models.Staff>
+@model IEnumerable<StaffCoreRD.Models.Staff>
 @{
     ViewData["Title"] = "Personal";
 }
@@ -9,64 +9,32 @@
 {
     <p>
         <a asp-action="Create" class="btn btn-primary">+ Nuevo Empleado</a>
+        <a asp-action="Estadisticas" class="btn btn-outline-secondary">Ver estadísticas por departamento</a>
     </p>
 }
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(m => m.Nombre)</th>
-            <th>@Html.DisplayNameFor(m => m.Cedula)</th>
-            <th>@Html.DisplayNameFor(m => m.Cargo)</th>
-            <th>@Html.DisplayNameFor(m => m.Departamento)</th>
-            <th>@Html.DisplayNameFor(m => m.Salario)</th>
-            <th>@Html.DisplayNameFor(m => m.Activo)</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (!Model.Any())
-        {
-            <tr>
-                <td colspan="7" class="text-center text-muted">No hay personal activo registrado.</td>
-            </tr>
-        }
-        else
-        {
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.Nombre</td>
-                    <td>@item.Cedula</td>
-                    <td>@item.Cargo</td>
-                    <td>@item.Departamento</td>
-                    <td>@item.Salario.ToString("C")</td>
-                    <td>@(item.Activo ? "Sí" : "No")</td>
-                    <td>
-                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-secondary">Ver</a>
+<div class="form-group mb-3">
+    <label for="buscarInput">Buscar por nombre</label>
+    <input type="text" id="buscarInput" class="form-control" placeholder="Escribe un nombre..." oninput="buscarPersonal()" />
+</div>
 
-                        @if (User.IsInRole("Administrador") || User.IsInRole("RRHH"))
-                        {
-                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Editar</a>
-                        }
+<div id="resultados-personal">
+    @await Html.PartialAsync("_TablaPersonal", Model)
+</div>
 
-                        @if (User.IsInRole("Administrador"))
-                        {
-                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Eliminar</a>
-                        }
-                    </td>
-                </tr>
-            }
+@section Scripts {
+    <script>
+        let temporizador;
+        function buscarPersonal() {
+            clearTimeout(temporizador);
+            temporizador = setTimeout(() => {
+                const termino = document.getElementById('buscarInput').value;
+                fetch('/Staff/Buscar?term=' + encodeURIComponent(termino))
+                    .then(respuesta => respuesta.text())
+                    .then(html => {
+                        document.getElementById('resultados-personal').innerHTML = html;
+                    });
+            }, 250); // pequeño retraso para no disparar una peticion por cada tecla
         }
-    </tbody>
-    @if (Model.Any())
-    {
-        <tfoot>
-            <tr>
-                <th colspan="4" class="text-end">Total de nómina:</th>
-                <th>@Model.Sum(s => s.Salario).ToString("C")</th>
-                <th colspan="2"></th>
-            </tr>
-        </tfoot>
-    }
-</table>
+    </script>
+}

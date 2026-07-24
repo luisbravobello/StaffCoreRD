@@ -26,6 +26,20 @@ namespace StaffCoreRD.Controllers
             return View(lista);
         }
 
+        // GET: /Staff/Buscar?term=xxx -> Buscador en tiempo real (bonus), llamado por AJAX desde Index
+        public async Task<IActionResult> Buscar(string? term)
+        {
+            var query = _context.Personal.Where(s => s.Activo);
+
+            if (!string.IsNullOrWhiteSpace(term))
+            {
+                query = query.Where(s => s.Nombre.Contains(term));
+            }
+
+            var lista = await query.OrderBy(s => s.Nombre).ToListAsync();
+            return PartialView("_TablaPersonal", lista);
+        }
+
         // GET: /Staff/Details/5 -> Administrador, RRHH y Viewer
         public async Task<IActionResult> Details(int? id)
         {
