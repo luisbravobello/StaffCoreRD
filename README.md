@@ -39,9 +39,3 @@ Roles del sistema
 - RRHH: puede Ver, Crear y Editar. No puede Eliminar.
 - Viewer: solo puede Ver el listado de personal. Rol por
   defecto para todo usuario que se registre despues del primero.
-
---------------------------------------------------------
-Repositorio GitHub
---------------------------------------------------------
-https://github.com/luisbravobello/StaffCoreRD.git
-========================================================
