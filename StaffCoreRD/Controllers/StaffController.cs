@@ -19,7 +19,10 @@ namespace StaffCoreRD.Controllers
         // GET: /Staff  -> Administrador, RRHH y Viewer pueden ver el listado
         public async Task<IActionResult> Index()
         {
-            var lista = await _context.Personal.OrderBy(s => s.Nombre).ToListAsync();
+            var lista = await _context.Personal
+                .Where(s => s.Activo)
+                .OrderBy(s => s.Nombre)
+                .ToListAsync();
             return View(lista);
         }
 
@@ -55,6 +58,7 @@ namespace StaffCoreRD.Controllers
 
             _context.Add(staff);
             await _context.SaveChangesAsync();
+            TempData["Exito"] = $"Empleado \"{staff.Nombre}\" creado exitosamente.";
             return RedirectToAction(nameof(Index));
         }
 
@@ -88,6 +92,7 @@ namespace StaffCoreRD.Controllers
             {
                 _context.Update(staff);
                 await _context.SaveChangesAsync();
+                TempData["Exito"] = $"Empleado \"{staff.Nombre}\" actualizado exitosamente.";
             }
             catch (DbUpdateConcurrencyException)
             {

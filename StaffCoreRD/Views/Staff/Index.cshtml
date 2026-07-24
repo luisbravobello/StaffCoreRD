@@ -25,29 +25,48 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @if (!Model.Any())
         {
             <tr>
-                <td>@item.Nombre</td>
-                <td>@item.Cedula</td>
-                <td>@item.Cargo</td>
-                <td>@item.Departamento</td>
-                <td>@item.Salario.ToString("C")</td>
-                <td>@(item.Activo ? "Sí" : "No")</td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-secondary">Ver</a>
-
-                    @if (User.IsInRole("Administrador") || User.IsInRole("RRHH"))
-                    {
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Editar</a>
-                    }
-
-                    @if (User.IsInRole("Administrador"))
-                    {
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Eliminar</a>
-                    }
-                </td>
+                <td colspan="7" class="text-center text-muted">No hay personal activo registrado.</td>
             </tr>
         }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Nombre</td>
+                    <td>@item.Cedula</td>
+                    <td>@item.Cargo</td>
+                    <td>@item.Departamento</td>
+                    <td>@item.Salario.ToString("C")</td>
+                    <td>@(item.Activo ? "Sí" : "No")</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-secondary">Ver</a>
+
+                        @if (User.IsInRole("Administrador") || User.IsInRole("RRHH"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Editar</a>
+                        }
+
+                        @if (User.IsInRole("Administrador"))
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Eliminar</a>
+                        }
+                    </td>
+                </tr>
+            }
+        }
     </tbody>
+    @if (Model.Any())
+    {
+        <tfoot>
+            <tr>
+                <th colspan="4" class="text-end">Total de nómina:</th>
+                <th>@Model.Sum(s => s.Salario).ToString("C")</th>
+                <th colspan="2"></th>
+            </tr>
+        </tfoot>
+    }
 </table>

@@ -39,10 +39,13 @@ namespace StaffCoreRD.Controllers
 
             if (result.Succeeded)
             {
-                // Todo usuario nuevo entra como "Viewer" por defecto (solo lectura)
-                await _userManager.AddToRoleAsync(user, "Viewer");
+                // Si es el primer usuario del sistema -> Administrador. Los demas -> Viewer.
+                bool esPrimerUsuario = _userManager.Users.Count() == 1;
+                string rol = esPrimerUsuario ? "Administrador" : "Viewer";
+                await _userManager.AddToRoleAsync(user, rol);
+
                 await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction("Index", "Staff");
+                return RedirectToAction("Index", "Home");
             }
 
             foreach (var error in result.Errors)
