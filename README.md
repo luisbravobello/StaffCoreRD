@@ -43,5 +43,5 @@ Roles del sistema
 --------------------------------------------------------
 Repositorio GitHub
 --------------------------------------------------------
-[PENDIENTE: pegar aqui el link publico de tu repositorio]
+https://github.com/luisbravobello/StaffCoreRD.git
 ========================================================
