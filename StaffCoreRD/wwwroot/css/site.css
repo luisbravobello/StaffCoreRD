@@ -1,22 +1,266 @@
-html {
-  font-size: 14px;
+/* =========================================================
+   StaffCore RD - Design tokens y estilos base
+   Paleta: tinta navy + acento teal (nomina/gestion, no plantilla generica)
+   Tipografia: Space Grotesk (titulos) / Inter (texto) / JetBrains Mono (cifras)
+   ========================================================= */
+
+:root {
+    --sc-ink: #10243e;
+    --sc-ink-soft: #1c3554;
+    --sc-bg: #f5f6f8;
+    --sc-surface: #ffffff;
+    --sc-accent: #1d7a6e;
+    --sc-accent-dark: #145c53;
+    --sc-amber: #c98a3b;
+    --sc-brick: #b3453a;
+    --sc-text: #1c2430;
+    --sc-text-muted: #5b6472;
+    --sc-border: #e3e6eb;
+    --sc-font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
+    --sc-font-body: 'Inter', 'Segoe UI', sans-serif;
+    --sc-font-mono: 'JetBrains Mono', 'Consolas', monospace;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+html, body {
+    height: 100%;
+    background-color: var(--sc-bg);
 }
 
 body {
-  margin-bottom: 60px;
+    font-family: var(--sc-font-body);
+    color: var(--sc-text);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--sc-font-display);
+    color: var(--sc-ink);
+    letter-spacing: -0.01em;
+}
+
+h2 {
+    font-weight: 700;
+    border-bottom: 3px solid var(--sc-accent);
+    display: inline-block;
+    padding-bottom: 0.25rem;
+    margin-bottom: 1.25rem;
+}
+
+a {
+    color: var(--sc-accent-dark);
+}
+
+    a:hover {
+        color: var(--sc-accent);
+    }
+
+/* ---------- Navbar ---------- */
+.sc-navbar {
+    background: linear-gradient(180deg, var(--sc-ink) 0%, var(--sc-ink-soft) 100%);
+    border-bottom: 3px solid var(--sc-accent);
+    padding-top: .65rem;
+    padding-bottom: .65rem;
+}
+
+.sc-brand {
+    font-family: var(--sc-font-display);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #ffffff !important;
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+}
+
+.sc-brand-mark {
+    background: var(--sc-accent);
+    color: #ffffff;
+    font-size: .75rem;
+    font-weight: 700;
+    border-radius: 6px;
+    padding: .2rem .4rem;
+    letter-spacing: .04em;
+}
+
+.sc-brand-rd {
+    color: var(--sc-amber);
+}
+
+.sc-navbar .nav-link {
+    color: rgba(255, 255, 255, 0.82) !important;
+    font-weight: 500;
+}
+
+    .sc-navbar .nav-link:hover {
+        color: #ffffff !important;
+    }
+
+.sc-user {
+    color: #ffffff !important;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .92rem;
+}
+
+.sc-badge {
+    font-family: var(--sc-font-mono);
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .03em;
+    padding: .2rem .5rem;
+    border-radius: 999px;
+    text-transform: uppercase;
+}
+
+.sc-badge-admin {
+    background: rgba(29, 122, 110, 0.25);
+    color: #7fd9c9;
+    border: 1px solid rgba(127, 217, 201, 0.4);
+}
+
+.sc-badge-rrhh {
+    background: rgba(201, 138, 59, 0.22);
+    color: #f0c185;
+    border: 1px solid rgba(240, 193, 133, 0.4);
+}
+
+.sc-badge-viewer {
+    background: rgba(255, 255, 255, 0.12);
+    color: #d7dbe2;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.sc-btn-ghost {
+    color: rgba(255, 255, 255, 0.85);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    font-size: .85rem;
+    padding: .3rem .75rem;
+}
+
+    .sc-btn-ghost:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+    }
+
+.sc-btn-accent {
+    background: var(--sc-accent);
+    color: #ffffff !important;
+    border-radius: 6px;
+    font-weight: 500;
+    border: none;
+}
+
+    .sc-btn-accent:hover {
+        background: var(--sc-accent-dark);
+    }
+
+/* ---------- Alertas ---------- */
+.sc-alert-success {
+    background-color: #e6f4f1;
+    border: 1px solid var(--sc-accent);
+    color: var(--sc-accent-dark);
+    border-radius: 8px;
+}
+
+/* ---------- Botones generales ---------- */
+.btn-primary {
+    background-color: var(--sc-accent);
+    border-color: var(--sc-accent);
+}
+
+    .btn-primary:hover, .btn-primary:focus {
+        background-color: var(--sc-accent-dark);
+        border-color: var(--sc-accent-dark);
+    }
+
+.btn-warning {
+    background-color: var(--sc-amber);
+    border-color: var(--sc-amber);
+    color: #ffffff;
+}
+
+    .btn-warning:hover {
+        color: #ffffff;
+        filter: brightness(0.92);
+    }
+
+.btn-danger {
+    background-color: var(--sc-brick);
+    border-color: var(--sc-brick);
+}
+
+    .btn-danger:hover {
+        filter: brightness(0.92);
+    }
+
+.btn, .form-control, .form-select {
+    border-radius: 6px;
+}
+
+/* ---------- Tarjetas contenedoras (forms) ---------- */
+.card, form.sc-card {
+    border: 1px solid var(--sc-border);
+    border-radius: 10px;
+    background: var(--sc-surface);
+}
+
+/* ---------- Tablas estilo "libro de nomina" ---------- */
+.table {
+    background: var(--sc-surface);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(16, 36, 62, 0.06);
+}
+
+    .table thead {
+        background-color: var(--sc-ink);
+    }
+
+        .table thead th {
+            color: #ffffff;
+            font-family: var(--sc-font-display);
+            font-weight: 500;
+            font-size: .82rem;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            border: none;
+            vertical-align: middle;
+        }
+
+    .table tbody tr:hover {
+        background-color: #eef7f5;
+    }
+
+    /* Cifras (cedula, salario) en monoespaciada, alineadas como en un libro contable */
+    .sc-num, .table td:nth-child(2), .table td:nth-child(5) {
+        font-family: var(--sc-font-mono);
+        font-variant-numeric: tabular-nums;
+    }
+
+    .table td:nth-child(5) {
+        text-align: right;
+        font-weight: 600;
+        color: var(--sc-ink);
+    }
+
+    .table tfoot th {
+        background-color: #eef1f5;
+        font-family: var(--sc-font-mono);
+        border-top: 2px solid var(--sc-ink);
+    }
+
+/* ---------- Footer ---------- */
+.sc-footer {
+    border-top: 1px solid var(--sc-border);
+    padding: 1.25rem 0;
+    font-size: .85rem;
+    margin-top: 3rem;
+}
+
+/* ---------- Focus visible (accesibilidad) ---------- */
+a:focus-visible, button:focus-visible, .btn:focus-visible, input:focus-visible, select:focus-visible {
+    outline: 2px solid var(--sc-accent);
+    outline-offset: 2px;
 }
