@@ -1,8 +1,47 @@
-﻿@{
+@{
     ViewData["Title"] = "Home Page";
+    var estaAutenticado = User.Identity != null && User.Identity.IsAuthenticated;
+    var puedeGestionar = User.IsInRole("Administrador") || User.IsInRole("RRHH");
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="sc-hero">
+    @if (estaAutenticado)
+    {
+        <h1>Hola de nuevo, @User.Identity!.Name</h1>
+        <p>Este es tu panel de StaffCore<span class="sc-brand-rd">RD</span>. Desde aquí puedes consultar el personal, revisar la nómina y llevar el control de tu equipo.</p>
+        <a class="btn sc-btn-accent" asp-controller="Staff" asp-action="Index">Ir a Personal</a>
+    }
+    else
+    {
+        <h1>StaffCore<span class="sc-brand-rd">RD</span></h1>
+        <p>Gestión de personal y nómina, simple y clara. Centraliza los datos de tu equipo, controla salarios por departamento y mantén todo al día en un solo lugar.</p>
+        <a class="btn sc-btn-accent me-2" asp-controller="Account" asp-action="Register">Crear cuenta</a>
+        <a class="btn sc-btn-ghost" asp-controller="Account" asp-action="Login">Iniciar sesión</a>
+    }
+</div>
+
+<div class="sc-feature-grid">
+    <div class="sc-feature-card">
+        <div class="sc-feature-icon">P</div>
+        <h3>Personal centralizado</h3>
+        <p>Consulta cédula, cargo, departamento y estado de cada empleado desde un solo listado.</p>
+        @if (estaAutenticado)
+        {
+            <a asp-controller="Staff" asp-action="Index" class="btn btn-sm btn-outline-secondary">Ver personal</a>
+        }
+    </div>
+    <div class="sc-feature-card">
+        <div class="sc-feature-icon">$</div>
+        <h3>Nómina al día</h3>
+        <p>Visualiza el salario de cada empleado y el total de nómina activa en tiempo real.</p>
+    </div>
+    <div class="sc-feature-card">
+        <div class="sc-feature-icon">%</div>
+        <h3>Estadísticas por departamento</h3>
+        <p>Compara la cantidad de empleados y el costo de nómina agrupado por departamento.</p>
+        @if (estaAutenticado && puedeGestionar)
+        {
+            <a asp-controller="Staff" asp-action="Estadisticas" class="btn btn-sm btn-outline-secondary">Ver estadísticas</a>
+        }
+    </div>
 </div>

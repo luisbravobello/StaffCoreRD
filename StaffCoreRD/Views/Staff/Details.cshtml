@@ -4,29 +4,32 @@
 }
 
 <h2>Detalle del Empleado</h2>
-<hr />
 
-<dl class="row">
-    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Nombre)</dt>
-    <dd class="col-sm-9">@Model.Nombre</dd>
+<div class="sc-page-card">
+    <dl class="row mb-0">
+        <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Nombre)</dt>
+        <dd class="col-sm-9">@Model.Nombre</dd>
 
-    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Cedula)</dt>
-    <dd class="col-sm-9">@Model.Cedula</dd>
+        <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Cedula)</dt>
+        <dd class="col-sm-9">@Model.Cedula</dd>
 
-    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Cargo)</dt>
-    <dd class="col-sm-9">@Model.Cargo</dd>
+        <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Cargo)</dt>
+        <dd class="col-sm-9">@Model.Cargo</dd>
 
-    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Departamento)</dt>
-    <dd class="col-sm-9">@Model.Departamento</dd>
+        <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Departamento)</dt>
+        <dd class="col-sm-9">@Model.Departamento</dd>
 
-    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Salario)</dt>
-    <dd class="col-sm-9">@Model.Salario.ToString("C")</dd>
+        <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Salario)</dt>
+        <dd class="col-sm-9">@Model.Salario.ToString("C")</dd>
 
-    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.FechaIngreso)</dt>
-    <dd class="col-sm-9">@Model.FechaIngreso.ToShortDateString()</dd>
+        <dt class="col-sm-3">@Html.DisplayNameFor(m => m.FechaIngreso)</dt>
+        <dd class="col-sm-9">@Model.FechaIngreso.ToShortDateString()</dd>
 
-    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Activo)</dt>
-    <dd class="col-sm-9">@(Model.Activo ? "Sí" : "No")</dd>
-</dl>
+        <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Activo)</dt>
+        <dd class="col-sm-9">
+            <span class="sc-status @(Model.Activo ? "sc-status-active" : "sc-status-inactive")">@(Model.Activo ? "Activo" : "Inactivo")</span>
+        </dd>
+    </dl>
+</div>
 
-<a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
+<a asp-action="Index" class="btn btn-secondary mt-3">Volver al listado</a>

@@ -4,15 +4,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - StaffCoreRD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/StaffCoreRD.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark sc-navbar mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">StaffCoreRD</a>
+                <a class="navbar-brand sc-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <span class="sc-brand-mark" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="3" y="13" width="4" height="8" rx="1" fill="currentColor" />
+                            <rect x="10" y="8" width="4" height="13" rx="1" fill="currentColor" />
+                            <rect x="17" y="3" width="4" height="18" rx="1" fill="currentColor" />
+                        </svg>
+                    </span>
+                    <span class="sc-brand-text">StaffCore<span class="sc-brand-rd">RD</span></span>
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,37 +32,42 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         @if (User.Identity != null && User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Staff" asp-action="Index">Personal</a>
+                                <a class="nav-link" asp-area="" asp-controller="Staff" asp-action="Index">Personal</a>
                             </li>
                         }
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav align-items-sm-center">
                         @if (User.Identity != null && User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <span class="nav-link text-dark">Hola, @User.Identity.Name</span>
+                                <span class="nav-link sc-user">
+                                    <span class="sc-badge @(User.IsInRole("Administrador") ? "sc-badge-admin" : User.IsInRole("RRHH") ? "sc-badge-rrhh" : "sc-badge-viewer")">
+                                        @(User.IsInRole("Administrador") ? "Admin" : User.IsInRole("RRHH") ? "RRHH" : "Viewer")
+                                    </span>
+                                    @User.Identity.Name
+                                </span>
                             </li>
                             <li class="nav-item">
                                 <form asp-controller="Account" asp-action="Logout" method="post" class="form-inline">
-                                    <button type="submit" class="btn btn-link nav-link text-dark" style="border:none;">Cerrar sesión</button>
+                                    <button type="submit" class="btn sc-btn-ghost">Cerrar sesión</button>
                                 </form>
                             </li>
                         }
                         else
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Iniciar sesión</a>
+                            <li class="nav-item me-sm-2">
+                                <a class="btn sc-btn-ghost" asp-controller="Account" asp-action="Login">Iniciar sesión</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Registrarse</a>
+                                <a class="btn sc-btn-accent" asp-controller="Account" asp-action="Register">Registrarse</a>
                             </li>
                         }
                     </ul>
@@ -62,7 +79,7 @@
         <main role="main" class="pb-3">
             @if (TempData["Exito"] != null)
             {
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <div class="alert sc-alert-success alert-dismissible fade show" role="alert">
                     @TempData["Exito"]
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
@@ -71,7 +88,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="sc-footer text-muted">
         <div class="container">
             &copy; 2026 - StaffCoreRD - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

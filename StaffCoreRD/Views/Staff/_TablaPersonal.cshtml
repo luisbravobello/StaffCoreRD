@@ -29,7 +29,9 @@
                     <td>@item.Cargo</td>
                     <td>@item.Departamento</td>
                     <td>@item.Salario.ToString("C")</td>
-                    <td>@(item.Activo ? "Sí" : "No")</td>
+                    <td>
+                        <span class="sc-status @(item.Activo ? "sc-status-active" : "sc-status-inactive")">@(item.Activo ? "Activo" : "Inactivo")</span>
+                    </td>
                     <td>
                         <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-secondary">Ver</a>
 

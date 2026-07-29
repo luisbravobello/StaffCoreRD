@@ -4,27 +4,28 @@
 }
 
 <h2>¿Eliminar este empleado?</h2>
-<hr />
 
 <div class="alert alert-warning">
     Esta acción no se puede deshacer.
 </div>
 
-<dl class="row">
-    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Nombre)</dt>
-    <dd class="col-sm-9">@Model.Nombre</dd>
+<div class="sc-page-card">
+    <dl class="row mb-0">
+        <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Nombre)</dt>
+        <dd class="col-sm-9">@Model.Nombre</dd>
 
-    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Cedula)</dt>
-    <dd class="col-sm-9">@Model.Cedula</dd>
+        <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Cedula)</dt>
+        <dd class="col-sm-9">@Model.Cedula</dd>
 
-    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Cargo)</dt>
-    <dd class="col-sm-9">@Model.Cargo</dd>
+        <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Cargo)</dt>
+        <dd class="col-sm-9">@Model.Cargo</dd>
 
-    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Departamento)</dt>
-    <dd class="col-sm-9">@Model.Departamento</dd>
-</dl>
+        <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Departamento)</dt>
+        <dd class="col-sm-9">@Model.Departamento</dd>
+    </dl>
+</div>
 
-<form asp-action="Delete" method="post">
+<form asp-action="Delete" method="post" class="mt-3">
     <input type="hidden" asp-for="Id" />
     <button type="submit" class="btn btn-danger">Sí, Eliminar</button>
     <a asp-action="Index" class="btn btn-secondary">Cancelar</a>

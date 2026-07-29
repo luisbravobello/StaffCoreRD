@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "staffcorerd",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "StaffCoreRD/StaffCoreRD.csproj", "--launch-profile", "https"],
+      "port": 7067,
+      "url": "https://localhost:7067"
+    }
+  ]
+}
