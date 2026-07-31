@@ -1,7 +1,8 @@
-
+========================================================
 StaffCore RD - Sistema de Gestion de Personal
 ISW-311 Tecnologias de Internet I
 Universidad Central del Este
+========================================================
 
 Nombre:     Luis Alejandro Bravo Bello
 Matricula:  LB2024-1279
@@ -39,3 +40,17 @@ Roles del sistema
 - RRHH: puede Ver, Crear y Editar. No puede Eliminar.
 - Viewer: solo puede Ver el listado de personal. Rol por
   defecto para todo usuario que se registre despues del primero.
+
+--------------------------------------------------------
+Funcionalidades adicionales (bonus)
+--------------------------------------------------------
+- Pagina de detalle por empleado (/Staff/Details/id).
+- Buscador en tiempo real por nombre en el listado de personal.
+- Resumen estadistico de personal y nomina agrupado por
+  departamento (/Staff/Estadisticas).
+
+--------------------------------------------------------
+Repositorio GitHub
+--------------------------------------------------------
+https://github.com/luisbravobello/StaffCoreRD
+========================================================
