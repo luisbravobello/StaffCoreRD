@@ -1,4 +1,4 @@
-========================================================
+
 StaffCore RD - Sistema de Gestion de Personal
 ISW-311 Tecnologias de Internet I
 Universidad Central del Este
